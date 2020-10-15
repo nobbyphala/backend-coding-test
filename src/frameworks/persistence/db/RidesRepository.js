@@ -33,7 +33,7 @@ const ridesRepository = (db) =>{
             }
            
             const ridesData = rows;
-            console.log(ridesData)
+            
             //check for data count
             db.all(queryRowCount, (err, rows)=>{
                 if (err){

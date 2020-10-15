@@ -2,12 +2,14 @@ const ridesRepository = require("../../frameworks/persistence/db/RidesRepository
 const addNewRidesUsecase = require('../../use_cases/rides/AddNewRides');
 const getRideDetailUsecase = require('../../use_cases/rides/GetRidesDetail');
 const getAllRidesUsecase = require('../../use_cases/rides/GetAllRides');
+const logger = require('../../config/winston');
 
 const ridesController = (dependencies) => {
     const repository = ridesRepository(dependencies.db);
 
     const addNewRides = (req, res) =>{
         const usecase = addNewRidesUsecase(repository);
+
         //validation
         const startLatitude = Number(req.body.start_lat);
         const startLongitude = Number(req.body.start_long);
@@ -17,7 +19,6 @@ const ridesController = (dependencies) => {
         const driverName = req.body.driver_name;
         const driverVehicle = req.body.driver_vehicle;
 
-        console.log(req.body)
         if (
             startLatitude < -90 ||
             startLatitude > 90 ||
@@ -76,7 +77,7 @@ const ridesController = (dependencies) => {
                 driverVehicle: driverVehicle,
             });
        } catch (error) {
-           console.log(error)
+           logger.error(error);
            return res.send({
                error_code: "SERVER_ERROR",
                message: "Internal Server Error",
@@ -104,7 +105,7 @@ const ridesController = (dependencies) => {
         try {
             usecase.Execute(req.params.id, callback)
         } catch (error) {
-            console.log(error);
+           logger.error(error);
             return res.send({
                 error_code: "SERVER_ERROR",
                 message: "Internal Server Error",
@@ -117,7 +118,7 @@ const ridesController = (dependencies) => {
 
         const page = Number(req.params.page);
         const dataPerPage = Number(req.params.dataPerPage);
-        console.log(req.params.page);
+        
         try {
             usecase.Execute(dataPerPage, page, (_, result) =>{
                 if (result.datas.length == 0){
@@ -130,7 +131,7 @@ const ridesController = (dependencies) => {
                 res.send(result);
             });
         } catch (error) {
-            console.log(error);
+            logger.error(error);
             return res.send({
                 error_code: "SERVER_ERROR",
                 message: "Internal Server Error",

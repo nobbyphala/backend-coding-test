@@ -1,3 +1,5 @@
+const logger = require('../../config/winston');
+
 const getAllRides = (ridesRepository) => {
     const Execute = async (rowPerPage, page, callback) => {
         try {
@@ -24,7 +26,7 @@ const getAllRides = (ridesRepository) => {
                 callback(err, result);
             });
         } catch (error) {
-            console.log(error)
+            logger.error(error);
         }
         
     };
