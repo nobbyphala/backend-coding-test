@@ -32,9 +32,7 @@ const ridesRepository = (db) => {
             if (err) {
                 callback(err, null, 0);
             }
-
             const ridesData = rows;
-
             //check for data count
             db.all(queryRowCount, (err, rows) => {
                 if (err) {
@@ -42,12 +40,10 @@ const ridesRepository = (db) => {
                 }
 
                 const totalData = rows[0].totalData;
-
                 callback(null, ridesData, totalData);
             });
         });
     };
-
     return {
         addRides,
         getRides,

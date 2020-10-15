@@ -9,7 +9,6 @@ const ridesController = (dependencies) => {
 
     const addNewRides = (req, res) => {
         const usecase = addNewRidesUsecase(repository);
-
         //validation
         const startLatitude = Number(req.body.start_lat);
         const startLongitude = Number(req.body.start_long);
@@ -119,7 +118,6 @@ const ridesController = (dependencies) => {
 
         const page = Number(req.params.page);
         const dataPerPage = Number(req.params.dataPerPage);
-
         try {
             usecase.Execute(dataPerPage, page, (_, result) => {
                 if (result.datas.length == 0) {
@@ -127,7 +125,7 @@ const ridesController = (dependencies) => {
                         error_code: 'RIDES_NOT_FOUND_ERROR',
                         message: 'Could not find any rides',
                     });
-                }
+                };
 
                 res.send(result);
             });

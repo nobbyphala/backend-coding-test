@@ -6,7 +6,7 @@ const addNewRides = (ridesRepository) => {
             ridesRepository.addRides(ridesData);
         } catch (error) {
             logger.error(error);
-            return error;
+            throw error;
         }
     };
 
