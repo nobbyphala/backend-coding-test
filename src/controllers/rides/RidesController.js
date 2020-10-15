@@ -125,7 +125,7 @@ const ridesController = (dependencies) => {
                         error_code: 'RIDES_NOT_FOUND_ERROR',
                         message: 'Could not find any rides',
                     });
-                };
+                }
 
                 res.send(result);
             });
