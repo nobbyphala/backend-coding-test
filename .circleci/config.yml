@@ -12,4 +12,5 @@ jobs:
 workflows:
   node-tests:
     jobs:
+      - setup
       - node/test
