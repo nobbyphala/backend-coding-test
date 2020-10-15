@@ -8,7 +8,7 @@ const getRidesDetail = (ridesRepository) => {
             });
         } catch (error) {
             logger.error(error);
-            throw error
+            throw error;
         }
     };
 

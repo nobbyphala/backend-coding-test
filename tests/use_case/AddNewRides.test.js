@@ -15,16 +15,17 @@ describe('Add new rides', () => {
     });
 
     it('should got error', (done) => {
-        var addRides = sinon.fake.throws(new Error("error"));
+        var addRides = sinon.fake.throws(new Error('error'));
 
         const usecase = addNewRidesUsecase({ addRides });
 
-       
-            usecase.Execute(1, () => {}).catch( (error) => {
-                assert.notEqual(error, undefined)
+        usecase;
+        usecase
+            .Execute(1, () => {})
+            .catch((error) => {
+                assert.notEqual(error, undefined);
             });
-        
-        
+
         assert.equal(addRides.called, true);
         done();
     });
