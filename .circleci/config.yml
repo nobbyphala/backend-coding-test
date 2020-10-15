@@ -1,6 +1,13 @@
 version: 2.1
 orbs:
   node: circleci/node@3.0.0
+
+jobs:
+  setup:
+    steps:
+      - run:
+        command: |
+          sudo apt install python
 workflows:
   node-tests:
     jobs:
