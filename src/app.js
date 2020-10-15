@@ -148,5 +148,6 @@ module.exports = (db) => {
     */
     app.get('/rides/:id', controllers.getRidesDetail);
 
+
     return app;
 };

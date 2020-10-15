@@ -77,7 +77,6 @@ const ridesController = (dependencies) => {
                 driverVehicle: driverVehicle,
             });
         } catch (error) {
-            console.log(error);
             logger.error(error);
             return res.send({
                 error_code: 'SERVER_ERROR',
@@ -119,7 +118,6 @@ const ridesController = (dependencies) => {
 
         const page = Number(req.params.page);
         const dataPerPage = Number(req.params.dataPerPage);
-
         try {
             usecase.Execute(dataPerPage, page, (_, result) => {
                 if (result.datas.length == 0) {

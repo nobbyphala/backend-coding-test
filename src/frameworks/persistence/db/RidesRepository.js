@@ -13,7 +13,7 @@ const ridesRepository = (db) => {
             rideData.driverVehicle,
         ];
 
-        await db.run(query, values);
+       db.run(query, values);
     };
 
     const getRides = async (ridesID, callback) => {
@@ -32,7 +32,6 @@ const ridesRepository = (db) => {
             if (err) {
                 callback(err, null, 0);
             }
-
             const ridesData = rows;
 
             //check for data count
@@ -42,17 +41,15 @@ const ridesRepository = (db) => {
                 }
 
                 const totalData = rows[0].totalData;
-
                 callback(null, ridesData, totalData);
             });
         });
     };
-
     return {
         addRides,
         getRides,
         getAllRides,
-    };
+    }
 };
 
 module.exports = ridesRepository;

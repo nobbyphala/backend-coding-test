@@ -3,10 +3,10 @@ const logger = require('../../config/winston');
 const addNewRides = (ridesRepository) => {
     const Execute = async (ridesData) => {
         try {
-            ridesRepository.addRides(ridesData);
+            await ridesRepository.addRides(ridesData);
         } catch (error) {
             logger.error(error);
-            return error;
+            throw error;
         }
     };
 
