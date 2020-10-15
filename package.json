@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "mocha tests",
-    "start": "node index.js"
+    "start": "node index.js",
+    "docs": "npx apidoc -i src/ -o docs/ && xdg-open docs/index.html"
   },
   "keywords": [
     "Xendit"
@@ -16,6 +17,7 @@
   "author": "Bo",
   "license": "ISC",
   "dependencies": {
+    "apidoc": "^0.25.0",
     "app-root-path": "^3.0.0",
     "body-parser": "^1.19.0",
     "eslint-config-prettier": "^6.12.0",
@@ -39,5 +41,12 @@
     "eslint-plugin-standard": "^4.0.1",
     "mocha": "^8.1.3",
     "supertest": "^4.0.2"
+  },
+  "apidoc": {
+    "name": "Xendit example",
+    "version": "0.1.0",
+    "description": "Xendit test documentaion",
+    "title": "Xendit test documentaion",
+    "url" : ""
   }
 }
