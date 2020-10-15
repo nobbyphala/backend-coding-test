@@ -6,9 +6,9 @@ jobs:
     steps:
       - checkout
       - run:
-        command: |
-          sudo apt install python
-          nvm install v8.11.3
+          command: |
+            sudo apt install python
+            nvm install v8.11.3
 
 workflows:
   node-tests:
