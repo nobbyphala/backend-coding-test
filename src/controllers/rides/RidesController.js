@@ -9,6 +9,7 @@ const ridesController = (dependencies) => {
 
     const addNewRides = (req, res) => {
         const usecase = addNewRidesUsecase(repository);
+
         //validation
         const startLatitude = Number(req.body.start_lat);
         const startLongitude = Number(req.body.start_long);
@@ -76,7 +77,6 @@ const ridesController = (dependencies) => {
                 driverVehicle: driverVehicle,
             });
         } catch (error) {
-            console.log(error);
             logger.error(error);
             return res.send({
                 error_code: 'SERVER_ERROR',
