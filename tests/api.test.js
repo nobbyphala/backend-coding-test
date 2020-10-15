@@ -53,5 +53,5 @@ describe('API tests', () => {
                 .expect('Content-Type', /json/)
                 .expect(200, done);
         });
-    });     
+    });
 });
