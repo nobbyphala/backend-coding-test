@@ -1,16 +1,16 @@
 version: 2.1
-orbs:
-  node: circleci/node@3.0.0
 
 jobs:
-  setup:
+  node-test:
     machine: true
     steps:
+      - checkout
       - run:
         command: |
           sudo apt install python
+          nvm install v8.11.3
+
 workflows:
   node-tests:
     jobs:
-      - setup
-      - node/test
+      - node-test
