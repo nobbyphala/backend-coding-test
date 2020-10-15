@@ -4,6 +4,7 @@ orbs:
 
 jobs:
   setup:
+    machine: true
     steps:
       - run:
         command: |
