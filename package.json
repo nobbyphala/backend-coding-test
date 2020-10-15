@@ -7,9 +7,10 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "mocha tests",
+    "test": "nyc mocha tests/** && eslint .",
     "start": "node index.js",
-    "docs": "npx apidoc -i src/ -o docs/ && xdg-open docs/index.html"
+    "docs": "npx apidoc -i src/ -o docs/ && xdg-open docs/index.html",
+    "prepush": "npm run test"
   },
   "keywords": [
     "Xendit"
@@ -25,7 +26,9 @@
     "eslint-plugin-prettier": "^3.1.4",
     "express": "^4.16.4",
     "minimist": "^1.2.5",
+    "nyc": "^15.1.0",
     "prettier": "^2.1.2",
+    "shared-git-hooks": "^1.2.1",
     "sinon": "^9.2.0",
     "sqlite3": "^4.0.6",
     "winston": "^3.3.3",
