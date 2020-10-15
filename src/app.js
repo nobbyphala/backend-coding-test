@@ -15,9 +15,9 @@ module.exports = (db) => {
     const controllers = ridesController(depedencies);
     app.get('/health', (req, res) => res.send('Healthy'));
     app.post('/rides', jsonParser, controllers.addNewRides);
-    app.get('/rides/:page/:dataPerPage',controllers.getAllRides)
-    
+    app.get('/rides/:page/:dataPerPage', controllers.getAllRides);
+
     app.get('/rides/:id', controllers.getRidesDetail);
-    
+
     return app;
 };

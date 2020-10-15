@@ -3,9 +3,9 @@ const logger = require('../../config/winston');
 const getRidesDetail = (ridesRepository) => {
     const Execute = async (ridesID, callback) => {
         try {
-            ridesRepository.getRides(ridesID, (err, row)=>{
-                if (err){
-                    throw(err);
+            ridesRepository.getRides(ridesID, (err, row) => {
+                if (err) {
+                    throw err;
                 }
 
                 return callback(row);
@@ -13,10 +13,11 @@ const getRidesDetail = (ridesRepository) => {
         } catch (error) {
             logger.error(error);
         }
-        
     };
 
-    return {Execute};
+    return {
+        Execute,
+    };
 };
 
 module.exports = getRidesDetail;

@@ -1,4 +1,4 @@
-const ridesRepository = require("../../frameworks/persistence/db/RidesRepository");
+const ridesRepository = require('../../frameworks/persistence/db/RidesRepository');
 const addNewRidesUsecase = require('../../use_cases/rides/AddNewRides');
 const getRideDetailUsecase = require('../../use_cases/rides/GetRidesDetail');
 const getAllRidesUsecase = require('../../use_cases/rides/GetAllRides');
@@ -7,7 +7,7 @@ const logger = require('../../config/winston');
 const ridesController = (dependencies) => {
     const repository = ridesRepository(dependencies.db);
 
-    const addNewRides = (req, res) =>{
+    const addNewRides = (req, res) => {
         const usecase = addNewRidesUsecase(repository);
 
         //validation
@@ -66,7 +66,7 @@ const ridesController = (dependencies) => {
             });
         }
 
-       try {
+        try {
             usecase.Execute({
                 startLatitude: startLatitude,
                 startLongitude: startLongitude,
@@ -76,74 +76,75 @@ const ridesController = (dependencies) => {
                 driverName: driverName,
                 driverVehicle: driverVehicle,
             });
-       } catch (error) {
-           logger.error(error);
-           return res.send({
-               error_code: "SERVER_ERROR",
-               message: "Internal Server Error",
-           })
-       }
+        } catch (error) {
+            console.log(error);
+            logger.error(error);
+            return res.send({
+                error_code: 'SERVER_ERROR',
+                message: 'Internal Server Error',
+            });
+        }
 
-       return res.send({
-           message: "Success",
-       })
-    }
+        return res.send({
+            message: 'Success',
+        });
+    };
 
-    const getRidesDetail = (req, res) =>{
+    const getRidesDetail = (req, res) => {
         const usecase = getRideDetailUsecase(repository);
 
-        const callback = (rows) =>{
-            if (rows.length == 0){
+        const callback = (rows) => {
+            if (rows.length == 0) {
                 return res.send({
                     error_code: 'RIDES_NOT_FOUND_ERROR',
                     message: 'Could not find any rides',
                 });
             }
             return res.send(rows);
-        }
+        };
 
         try {
-            usecase.Execute(req.params.id, callback)
+            usecase.Execute(req.params.id, callback);
         } catch (error) {
-           logger.error(error);
+            logger.error(error);
             return res.send({
-                error_code: "SERVER_ERROR",
-                message: "Internal Server Error",
+                error_code: 'SERVER_ERROR',
+                message: 'Internal Server Error',
             });
         }
-    }
+    };
 
     const getAllRides = (req, res) => {
         const usecase = getAllRidesUsecase(repository);
 
         const page = Number(req.params.page);
         const dataPerPage = Number(req.params.dataPerPage);
-        
+
         try {
-            usecase.Execute(dataPerPage, page, (_, result) =>{
-                if (result.datas.length == 0){
+            usecase.Execute(dataPerPage, page, (_, result) => {
+                if (result.datas.length == 0) {
                     return res.send({
                         error_code: 'RIDES_NOT_FOUND_ERROR',
                         message: 'Could not find any rides',
                     });
-                };
+                }
 
                 res.send(result);
             });
         } catch (error) {
             logger.error(error);
             return res.send({
-                error_code: "SERVER_ERROR",
-                message: "Internal Server Error",
+                error_code: 'SERVER_ERROR',
+                message: 'Internal Server Error',
             });
         }
-    }
+    };
 
     return {
         addNewRides,
         getRidesDetail,
         getAllRides,
-    }
-}
+    };
+};
 
 module.exports = ridesController;

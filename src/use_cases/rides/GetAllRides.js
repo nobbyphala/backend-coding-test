@@ -6,32 +6,37 @@ const getAllRides = (ridesRepository) => {
             const offset = page * rowPerPage - rowPerPage;
             const limit = rowPerPage;
 
-            console.log(limit);
+            ridesRepository.getAllRides(
+                limit,
+                offset,
+                (err, rows, totalData) => {
+                    if (err) {
+                        throw err;
+                    }
 
-            ridesRepository.getAllRides(limit, offset, (err, rows, totalData)=>{
-                if (err){
-                    throw(err);
+                    const totalPage = Math.ceil(
+                        Number(totalData) / Number(rows.length)
+                    );
+
+                    const result = {
+                        datas: rows,
+                        dataCount: rows.length,
+                        totalData: totalData,
+                        totalPage: totalPage,
+                        currentPage: page,
+                        dataPerPage: rowPerPage,
+                    };
+                    callback(err, result);
                 }
-
-                const totalPage = Math.ceil(Number(totalData) / Number(rows.length) );
-
-                const result = {
-                    datas: rows,
-                    dataCount: rows.length,
-                    totalData: totalData,
-                    totalPage: totalPage,
-                    currentPage: page,
-                    dataPerPage: rowPerPage,
-                };
-                callback(err, result);
-            });
+            );
         } catch (error) {
             logger.error(error);
         }
-        
     };
 
-    return {Execute};
+    return {
+        Execute,
+    };
 };
 
 module.exports = getAllRides;

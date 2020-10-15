@@ -6,12 +6,13 @@ const addNewRides = (ridesRepository) => {
             ridesRepository.addRides(ridesData);
         } catch (error) {
             logger.error(error);
-            return error
+            return error;
         }
-        
     };
 
-    return {Execute};
+    return {
+        Execute,
+    };
 };
 
 module.exports = addNewRides;
