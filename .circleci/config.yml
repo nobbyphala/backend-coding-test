@@ -8,7 +8,8 @@ jobs:
       - run:
           command: |
             sudo apt install python
-            nvm install v8.11.3
+            sudo apt install nodejs
+            sudo apt install npm
 
 workflows:
   node-tests:
