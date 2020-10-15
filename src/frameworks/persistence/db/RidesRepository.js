@@ -13,7 +13,7 @@ const ridesRepository = (db) => {
             rideData.driverVehicle,
         ];
 
-        await db.run(query, values);
+       db.run(query, values);
     };
 
     const getRides = async (ridesID, callback) => {
@@ -49,7 +49,7 @@ const ridesRepository = (db) => {
         addRides,
         getRides,
         getAllRides,
-    };
+    }
 };
 
 module.exports = ridesRepository;

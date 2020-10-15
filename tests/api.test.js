@@ -29,4 +29,29 @@ describe('API tests', () => {
                 .expect(200, done);
         });
     });
+
+    describe('GET /rides/1/1', () => {
+        it('should return rides data', (done) => {
+            request(app)
+                .get('/rides/1/1')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
+    });
+    describe('GET /rides/1', () => {
+        it('should return rides data', (done) => {
+            request(app)
+                .get('/rides/1/1')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
+    });
+    describe('POST /rides', () => {
+        it('should return rides data', (done) => {
+            request(app)
+                .post('/rides')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
+    });     
 });
