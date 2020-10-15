@@ -1,0 +1,23 @@
+config:
+  target: "http://127.0.0.1:8010"
+  phases:
+    - duration: 30
+      arrivalRate: 20
+scenarios:
+  - flow:
+      - get:
+          url: "/health"
+      - post:
+          url: "/rides"
+          json:
+            start_lat: 10
+            start_long: 10
+            end_lat: 11
+            end_long: 11
+            rider_name: "test"
+            driver_name: "test"
+            driver_vehicle: "bike"
+      - get:
+          url: "/rides/1/1000"
+      - get:
+          url: "/rides/1"
